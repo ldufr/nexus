@@ -47,8 +47,13 @@ static HANDLE WINAPI DetourCreateMutexA(
     LPCSTR                lpName
     )
 {
-    if (strcmp(lpName, "AN-Mutex-Window-Guild Wars") == 0)
-        lpName = NULL;
+    if (lpName)
+    {
+        if (strcmp(lpName, "AN-Mutex-Window-Guild Wars") == 0)
+            lpName = NULL;
+        else if (strcmp(lpName, "AN-Mutex-Window-Guild Wars Reforged") == 0)
+            lpName = NULL;
+    }
     return fpCreateMutexA(lpMutexAttributes, bInitialOwner, lpName);
 }
 
