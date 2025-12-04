@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nexus", "code\nexus\nexus.vcxproj", "{39CBEFA9-E9AC-4681-B39D-27A1953D8245}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D955C505-BDBB-440D-A421-460EB42EE5D9} = {D955C505-BDBB-440D-A421-460EB42EE5D9}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMinHook", "code\minhook\build\VC15\libMinHook.vcxproj", "{F142A341-5EE0-442D-A15F-98AE9B48DBAE}"
 EndProject
