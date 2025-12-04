@@ -219,7 +219,10 @@ BOOL CloseHandles(void)
 
             if (!NT_SUCCESS(Status))
             {
-                fprintf(stderr, "NtDuplicateObject failed: 0x%X\n", Status);
+                if (Status != 0xC00000BB)
+                {
+                    fprintf(stderr, "NtDuplicateObject failed: 0x%X\n", Status);
+                }
                 if (NUMBER_OF_CACHED_PROCS <= ProcessId)
                     CloseHandle(Process);
                 continue;
@@ -235,7 +238,20 @@ BOOL CloseHandles(void)
             // and FILE_TYPE_PIPE. In our case, we don't care, because the objects we want
             // to close are not FILE_TYPE_PIPE.
             //
-            if (GetFileType(DupHandle) != FILE_TYPE_DISK)
+
+            DWORD FileType = GetFileType(DupHandle);
+            // printf("[+] FileType: %lu\n", FileType);
+            if (FileType == FILE_TYPE_UNKNOWN)
+            {
+                DWORD LastError = GetLastError();
+                if (LastError != NO_ERROR)
+                {
+                    fprintf(stderr, "GetFileType failed (%lu)\n", GetLastError());
+                    continue;
+                }
+            }
+
+            if (FileType != FILE_TYPE_DISK)
             {
                 // @Cleanup:
                 // There is probably stuff to free here.
