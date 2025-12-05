@@ -219,7 +219,7 @@ BOOL CloseHandles(void)
 
             if (!NT_SUCCESS(Status))
             {
-                if (Status != 0xC00000BB)
+                if (Status != 0xC00000BB /* STATUS_NOT_SUPPORTED */ && Status != STATUS_INVALID_HANDLE)
                 {
                     fprintf(stderr, "NtDuplicateObject failed: 0x%X\n", Status);
                 }
@@ -244,7 +244,7 @@ BOOL CloseHandles(void)
             if (FileType == FILE_TYPE_UNKNOWN)
             {
                 DWORD LastError = GetLastError();
-                if (LastError != NO_ERROR)
+                if (LastError != NO_ERROR && LastError != ERROR_INVALID_HANDLE)
                 {
                     fprintf(stderr, "GetFileType failed (%lu)\n", GetLastError());
                     continue;
