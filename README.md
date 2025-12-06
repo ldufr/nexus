@@ -5,7 +5,7 @@ of Guild Wars. Nexus will work just fine if you already started Guild Wars, but
 from a different installation. No Guild Wars instance should old a handle to the
 Gw.dat that you will be using.
 
-All processes started by nexus will have read access to the dll and will share
+All processes started by nexus will have read access to the dat and will share
 the read access as well. This avoid corruption of Gw.dat while still allowing
 the client to read in it. For this reason, your Gw.dat should be completely
 downloaded to not miss on textures or potentially not being able to load a map.
